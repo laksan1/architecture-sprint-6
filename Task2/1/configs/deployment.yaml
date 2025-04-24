@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: shestera-scaletestapp-deployment
+  name: laksan-deployment
   labels:
-    app: shestera-scaletestapp
+    app: laksan
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: shestera-scaletestapp
+      app: laksan
   template:
     metadata:
       labels:
-        app: shestera-scaletestapp
+        app: laksan
     spec:
       containers:
-        - name: shestera-scaletestapp
+        - name: laksan
           image: shestera/scaletestapp:latest
           ports:
             - containerPort: 8080

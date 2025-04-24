@@ -14,7 +14,7 @@ minikube start
 minikube addons enable metrics-server
 ```
 
-![Скриншот 1 и 2 пункта](./images/1,2.png)
+![Скриншот 1 и 2 пункта](./1/images/1,2.png)
 
 3. Делаем развертывание (Deployment) Kubernetes для запуска тестового приложения
 
@@ -41,7 +41,8 @@ minikube addons enable metrics-server
 ```
 
 7. Сделал в 5 пункте
-   ![Скриншот 3,4,5,6,7 пункта](./images/3,4,5,6,7.png)
+
+   ![Скриншот 3,4,5,6,7 пункта](./1/images/3,4,5,6,7.png)
 
 8. Проверка масштабируемости подов через нагрузку Locust
 
@@ -51,10 +52,36 @@ locust
 minikube dashboard
 ```
 
-![Скриншот Locust](./images/locust.png)
+Скриншот Статистики запросов в Locust
+![Скриншот Статистики запросов в Locust](./1/images/locust_statistics.png)
 
-![Скриншот Dashboard](./images/minikube_dashboard.png)
+Скриншот Диаграмм в Locust
+![Скриншот Статистики запросов в Locust](./1/images/locust_charts.png)
 
----
+Скриншот Dashboard для нагрузки USERS: 1000 и RPS: 330
+Видим, что количество подов выросло до 4 подов
+![Скриншот Статистики запросов в Locust](./1/images/minikube_dashboard.png)
+
+Скриншот раздела Deployment в Dashboard
+![Скриншот Статистики запросов в Locust](./1/images/minikube_dashboard_deployment.png)
+
+Скриншот раздела Pods в Dashboard
+![Скриншот Статистики запросов в Locust](./1/images/minikube_dashboard_pods.png)
+
+Скриншот раздела Pods в Dashboard при увеличенной нагрузке.
+В конце Timeline графиков виден скачок CPU и Memory.
+Поды автоматически увеличились до 9
+![Скриншот Статистики запросов в Locust](./1/images/minikube_dashboard_highload_9_pods.png)
+
+**Вывод**
+
+🔁 HPA реагирует на нагрузку
+Сначала нагрузка по памяти была 62% — HPA держал 2 реплики.
+
+Потом утилизация выросла до 126% — HPA увеличил количество реплик до 4, чтобы справиться с нагрузкой.
+
+Далее утилизация стабилизировалась на уровне 65–66% — ниже порога 80%, поэтому новых подов не создаётся.
+
+## 📌 HPA = автоматическое масштабирование подов по памяти.
 
 ### 2. Динамическая маршрутизация на основании показателей количества запросов в секунду
