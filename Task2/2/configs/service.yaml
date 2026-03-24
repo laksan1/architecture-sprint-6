@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-metrics-app
+  labels:
+    app: node-metrics-app
+    prometheus-monitored: "true"  # этот лейбл нужен для ServiceMonitor
+spec:
+  selector:
+    app: node-metrics-app
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080  # ← меняем на 8080, чтобы совпадал с тем, что слушает приложение
+  type: ClusterIP

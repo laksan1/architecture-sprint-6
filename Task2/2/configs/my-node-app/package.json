@@ -1,0 +1,15 @@
+{
+  "name": "node-metrics-app",
+  "version": "1.0.0",
+  "description": "Node.js app with Prometheus metrics",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "prom-client": "^14.1.0"
+  },
+  "author": "",
+  "license": "ISC"
+}

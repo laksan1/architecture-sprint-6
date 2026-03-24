@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-metrics-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-metrics-app
+  template:
+    metadata:
+      labels:
+        app: node-metrics-app
+    spec:
+      containers:
+        - name: node-metrics-app
+          image: node-metrics-app:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          command:
+            - /bin/sh
+            - -c
+            - "ulimit -n 65536 && node /app/index.js"
